@@ -3,11 +3,12 @@ import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema({
-  timestamps: true
+  timestamps: true,
+  strict: false,
 })
 export class User extends Document {
   @Prop({ required: true })
-  username: string
+  username: string;
 
   @Prop({ required: true })
   firstname: string;
@@ -29,6 +30,8 @@ export class User extends Document {
     province: string;
     country: string
   };
-}
 
+  @Prop({type: [String]})
+  talents: string[];
+}
 export const UserSchema = SchemaFactory.createForClass(User);
